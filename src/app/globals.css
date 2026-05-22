@@ -1,0 +1,345 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ─────────────────────────────────────────────────── */
+:root {
+  --bg:        #F8F7F4;
+  --bg-subtle: #F1EFE9;
+  --surface:   #FFFFFF;
+  --border:    #E2DED6;
+  --border-strong: #BDB8AE;
+
+  --ink:       #0C0C0A;
+  --ink-2:     #282520;
+  --ink-3:     #5A5550;
+  --ink-4:     #9B968E;
+
+  --accent:    #0D6EFD;
+  --accent-2:  #0A58CA;
+
+  /* Typography */
+  --font-sans: var(--font-grotesk), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-jetbrains), "Fira Code", "Courier New", monospace;
+
+  /* Spacing rhythm */
+  --section-pad-x: clamp(1.5rem, 5vw, 5rem);
+  --section-pad-y: clamp(4.5rem, 9vw, 8rem);
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* ── Fine grain overlay — parchment warmth ───────────────────────────── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-subtle); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+
+/* ─── Page-Load Reveal Animations ───────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  animation: revealUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-fade {
+  opacity: 0;
+  animation: revealFade 0.65s ease forwards;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.97);
+  animation: revealScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes revealUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes revealFade {
+  to { opacity: 1; }
+}
+
+@keyframes revealScale {
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ─── Hairline Rules ─────────────────────────────────────────────────── */
+.rule {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.rule-strong {
+  border: none;
+  border-top: 1px solid var(--border-strong);
+}
+
+/* ─── Mono Label ─────────────────────────────────────────────────────── */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+/* ─── Section Label ──────────────────────────────────────────────────── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::before {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background: var(--ink-4);
+  flex-shrink: 0;
+}
+
+/* ─── Hero ghost monogram ────────────────────────────────────────────── */
+.hero-monogram {
+  position: absolute;
+  right: clamp(-1rem, -2vw, -3rem);
+  top: 50%;
+  transform: translateY(-54%);
+  font-family: var(--font-sans);
+  font-size: clamp(16rem, 32vw, 38rem);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.08em;
+  color: var(--ink);
+  opacity: 0.028;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: revealFade 1.8s ease 200ms forwards;
+  opacity: 0;
+}
+
+/* ─── Project Row ────────────────────────────────────────────────────── */
+.project-row {
+  display: block;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.18s ease;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.project-row:hover {
+  text-decoration: none;
+}
+
+/* Number */
+.project-num {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: var(--ink-4);
+  letter-spacing: 0.06em;
+  transition: color 0.18s ease;
+  line-height: 1;
+}
+
+/* On hover, number transitions to accent color — defined inline per-row */
+.project-row:hover .project-num {
+  color: var(--row-accent, var(--ink-3));
+}
+
+/* Tag pill */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 2px;
+  border: 1px solid currentColor;
+  opacity: 0.55;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.project-row:hover .tag {
+  opacity: 0.85;
+}
+
+/* Code link */
+.code-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.18s ease, gap 0.18s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.project-row:hover .code-link {
+  opacity: 1;
+  gap: 5px;
+}
+
+/* Accent bar — left edge color marker */
+.accent-bar {
+  width: 2px;
+  flex-shrink: 0;
+  border-radius: 1px;
+  transition: width 0.18s ease, opacity 0.18s ease;
+  align-self: stretch;
+  opacity: 0.5;
+}
+
+.project-row:hover .accent-bar {
+  width: 3px;
+  opacity: 1;
+}
+
+/* Row arrow */
+.row-arrow {
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-row:hover .row-arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* ─── Stack chip ─────────────────────────────────────────────────────── */
+.stack-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 5px 11px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  color: var(--ink-3);
+  background: transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.stack-chip:hover {
+  border-color: var(--ink-3);
+  color: var(--ink);
+}
+
+/* ─── Principle card ─────────────────────────────────────────────────── */
+.principle-num {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  color: var(--ink-4);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+  padding-top: 0.15rem;
+  width: 2.25rem;
+}
+
+/* ─── CTA Buttons ────────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6875rem 1.375rem;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  font-weight: 600;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--ink-2);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6875rem 1.375rem;
+  border: 1px solid var(--border-strong);
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  font-weight: 500;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
