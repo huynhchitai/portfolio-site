@@ -7,6 +7,7 @@ export interface Project {
   accent: string;
   accentLight: string;
   github: string;
+  demo?: string;
 }
 
 export const projects: Project[] = [
@@ -19,6 +20,7 @@ export const projects: Project[] = [
     accent: "#FF6B00",
     accentLight: "#FF6B0015",
     github: "https://github.com/0CCHacker/rag-chatbot",
+    demo: "https://rag-chatbot-dgxvcbmcia-uc.a.run.app",
   },
   {
     id: 2,
@@ -29,6 +31,7 @@ export const projects: Project[] = [
     accent: "#D98F00",
     accentLight: "#D98F0015",
     github: "https://github.com/0CCHacker/web-scraper",
+    demo: "https://web-scraper-dgxvcbmcia-uc.a.run.app",
   },
   {
     id: 3,
@@ -39,6 +42,7 @@ export const projects: Project[] = [
     accent: "#E2483D",
     accentLight: "#E2483D15",
     github: "https://github.com/0CCHacker/resume-tailor",
+    demo: "https://resume-tailor-dgxvcbmcia-uc.a.run.app",
   },
   {
     id: 4,
@@ -49,6 +53,7 @@ export const projects: Project[] = [
     accent: "#1F6F4A",
     accentLight: "#1F6F4A15",
     github: "https://github.com/0CCHacker/invoice-extractor",
+    demo: "https://invoice-extractor-dgxvcbmcia-uc.a.run.app",
   },
   {
     id: 5,
@@ -59,6 +64,7 @@ export const projects: Project[] = [
     accent: "#E8613A",
     accentLight: "#E8613A15",
     github: "https://github.com/0CCHacker/faq-widget",
+    demo: "https://faq-widget-dgxvcbmcia-uc.a.run.app",
   },
   {
     id: 6,
@@ -69,6 +75,7 @@ export const projects: Project[] = [
     accent: "#2F4B7C",
     accentLight: "#2F4B7C15",
     github: "https://github.com/0CCHacker/meeting-notes",
+    demo: "https://meeting-notes-dgxvcbmcia-uc.a.run.app",
   },
   {
     id: 7,
@@ -79,6 +86,7 @@ export const projects: Project[] = [
     accent: "#8C2D2D",
     accentLight: "#8C2D2D15",
     github: "https://github.com/0CCHacker/semantic-search",
+    demo: "https://semantic-search-dgxvcbmcia-uc.a.run.app",
   },
   {
     id: 8,
@@ -89,6 +97,7 @@ export const projects: Project[] = [
     accent: "#7A8C0A",
     accentLight: "#7A8C0A15",
     github: "https://github.com/0CCHacker/content-studio",
+    demo: "https://content-studio-dgxvcbmcia-uc.a.run.app",
   },
   {
     id: 9,
@@ -99,6 +108,7 @@ export const projects: Project[] = [
     accent: "#2B5FE3",
     accentLight: "#2B5FE315",
     github: "https://github.com/0CCHacker/review-analytics",
+    demo: "https://review-analytics-dgxvcbmcia-uc.a.run.app",
   },
   {
     id: 10,
@@ -109,6 +119,7 @@ export const projects: Project[] = [
     accent: "#C98A00",
     accentLight: "#C98A0015",
     github: "https://github.com/0CCHacker/nl-to-sql",
+    demo: "https://nl-to-sql-dgxvcbmcia-uc.a.run.app",
   },
   {
     id: 11,
@@ -119,6 +130,7 @@ export const projects: Project[] = [
     accent: "#1F8C8C",
     accentLight: "#1F8C8C15",
     github: "https://github.com/0CCHacker/web-research-mcp",
+    // No web demo — MCP runs over stdio inside an AI client.
   },
 ];
 
@@ -130,6 +142,6 @@ export const stack = [
   "Upstash Redis",
   "zod",
   "Vitest",
-  "Vercel",
+  "Cloud Run",
   "MCP",
 ];

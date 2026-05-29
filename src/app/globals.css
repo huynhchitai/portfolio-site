@@ -343,3 +343,40 @@ body::after {
   border-color: var(--ink);
   color: var(--ink);
 }
+
+/* ─── Row-level CTAs (per project) ───────────────────────────────────── */
+.row-cta-primary,
+.row-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.45rem 0.75rem;
+  border-radius: 2px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+  border: 1px solid;
+}
+
+.row-cta-primary {
+  color: var(--bg);
+}
+
+.row-cta-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 -1px rgba(0, 0, 0, 0.08);
+}
+
+.row-cta-secondary {
+  background: transparent;
+  font-weight: 500;
+}
+
+.row-cta-secondary:hover {
+  transform: translateY(-1px);
+}

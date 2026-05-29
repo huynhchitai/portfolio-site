@@ -96,23 +96,19 @@ export default function ProjectIndex() {
       {/* Project rows */}
       <div>
         {projects.map((project, i) => (
-          <a
+          <div
             key={project.id}
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
             className="project-row reveal"
             style={{
               animationDelay: `${300 + i * 40}ms`,
-              /* CSS custom property for accent-aware num color */
               ["--row-accent" as string]: project.accent,
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
+              (e.currentTarget as HTMLDivElement).style.backgroundColor =
                 project.accentLight;
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
+              (e.currentTarget as HTMLDivElement).style.backgroundColor =
                 "transparent";
             }}
           >
@@ -142,52 +138,20 @@ export default function ProjectIndex() {
 
               {/* Main content */}
               <div style={{ flex: 1, minWidth: 0 }}>
-                {/* Title line */}
-                <div
+                {/* Title */}
+                <h3
                   style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    alignItems: "baseline",
-                    gap: "0.75rem",
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "clamp(1rem, 2vw, 1.25rem)",
+                    fontWeight: 700,
+                    letterSpacing: "-0.025em",
+                    color: "var(--ink)",
+                    lineHeight: 1.15,
                     marginBottom: "0.45rem",
                   }}
                 >
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-sans)",
-                      fontSize: "clamp(1rem, 2vw, 1.25rem)",
-                      fontWeight: 700,
-                      letterSpacing: "-0.025em",
-                      color: "var(--ink)",
-                      lineHeight: 1.15,
-                      transition: "color 0.15s ease",
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-                  <span
-                    className="code-link"
-                    style={{ color: project.accent }}
-                    aria-hidden="true"
-                  >
-                    Code
-                    <svg
-                      width="8"
-                      height="8"
-                      viewBox="0 0 8 8"
-                      fill="none"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M1.5 6.5L6.5 1.5M6.5 1.5H3M6.5 1.5V5"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                </div>
+                  {project.title}
+                </h3>
 
                 {/* Pitch */}
                 <p
@@ -205,48 +169,61 @@ export default function ProjectIndex() {
                 </p>
 
                 {/* Skill tags */}
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", marginBottom: "0.85rem" }}>
                   {project.demonstrates.map((tag) => (
-                    <span
-                      key={tag}
-                      className="tag"
-                      style={{ color: project.accent }}
-                    >
+                    <span key={tag} className="tag" style={{ color: project.accent }}>
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
 
-              {/* Row arrow — desktop */}
-              <div
-                className="hidden sm:flex"
-                style={{
-                  alignItems: "center",
-                  paddingLeft: "1.75rem",
-                  alignSelf: "center",
-                }}
-              >
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                  className="row-arrow"
-                  style={{ color: project.accent }}
-                >
-                  <path
-                    d="M3 8H13M8.5 3.5L13 8L8.5 12.5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                {/* Action links — Try demo (primary) + Code (secondary) */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center" }}>
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="row-cta-primary"
+                      style={{
+                        background: project.accent,
+                        borderColor: project.accent,
+                      }}
+                    >
+                      Try demo
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                        <path
+                          d="M2 8L8 2M8 2H3.5M8 2V6.5"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </a>
+                  )}
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="row-cta-secondary"
+                    style={{ color: project.accent, borderColor: `${project.accent}55` }}
+                  >
+                    Code
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                      <path
+                        d="M2 8L8 2M8 2H3.5M8 2V6.5"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
-          </a>
+          </div>
         ))}
       </div>
 
