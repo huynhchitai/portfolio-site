@@ -3,28 +3,40 @@
 @tailwind utilities;
 
 /* ─── Design Tokens ─────────────────────────────────────────────────── */
+/* Editorial quarterly — warm cream paper, oxblood accent, ink that is
+   warm-black rather than stark. The cream is just a touch deeper than the
+   prior --bg so the page reads as printed rather than as a screen. */
 :root {
-  --bg:        #F8F7F4;
-  --bg-subtle: #F1EFE9;
-  --surface:   #FFFFFF;
-  --border:    #E2DED6;
-  --border-strong: #BDB8AE;
+  --bg:            #F2EDE2;
+  --bg-deep:       #E8E0CE;
+  --bg-subtle:     #EFE9DC;
+  --surface:       #FBF7EC;
+  --border:        #D6CCB6;
+  --border-strong: #ADA189;
 
-  --ink:       #0C0C0A;
-  --ink-2:     #282520;
-  --ink-3:     #5A5550;
-  --ink-4:     #9B968E;
+  --ink:           #1A140F;
+  --ink-2:         #2E251C;
+  --ink-3:         #5A4E3E;
+  --ink-4:         #948770;
 
-  --accent:    #0D6EFD;
-  --accent-2:  #0A58CA;
+  --accent:        #7A2218;   /* oxblood */
+  --accent-2:      #5C1810;
+  --accent-soft:   #7A22181A;
 
   /* Typography */
-  --font-sans: var(--font-grotesk), "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: var(--font-jetbrains), "Fira Code", "Courier New", monospace;
+  --font-sans:  var(--font-grotesk), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:  var(--font-jetbrains), "Fira Code", "Courier New", monospace;
+  --font-serif: var(--font-serif), "Times New Roman", Georgia, serif;
 
-  /* Spacing rhythm */
-  --section-pad-x: clamp(1.5rem, 5vw, 5rem);
-  --section-pad-y: clamp(4.5rem, 9vw, 8rem);
+  /* Vertical rhythm — section padding is generous, baseline is set by 1.7em */
+  --section-pad-x: clamp(1.5rem, 5vw, 5.5rem);
+  --section-pad-y: clamp(5rem, 10vw, 9rem);
+  --gutter:        clamp(1.25rem, 3vw, 2.5rem);
+
+  /* Editorial measure caps */
+  --measure-narrow: 38ch;
+  --measure-base:   54ch;
+  --measure-wide:   68ch;
 }
 
 /* ─── Reset & Base ───────────────────────────────────────────────────── */
@@ -55,21 +67,39 @@ body {
   background-color: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
+  font-feature-settings: "ss01" 1, "kern" 1, "calt" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
-/* ── Fine grain overlay — parchment warmth ───────────────────────────── */
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ── Paper texture overlay — three-layer atmosphere ─────────────────── */
+/* 1) noise grain, 2) warm corner vignette, 3) faint right-margin shadow */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background:
+    radial-gradient(120% 80% at 0% 0%,  rgba(122, 34, 24, 0.018) 0%, transparent 60%),
+    radial-gradient(120% 80% at 100% 100%, rgba(0, 0, 0, 0.025)  0%, transparent 65%);
+}
+
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.032;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 220px 220px;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────────────────── */
@@ -81,12 +111,12 @@ body::after {
 .reveal {
   opacity: 0;
   transform: translateY(22px);
-  animation: revealUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: revealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .reveal-fade {
   opacity: 0;
-  animation: revealFade 0.65s ease forwards;
+  animation: revealFade 0.7s ease forwards;
 }
 
 .reveal-scale {
@@ -95,175 +125,179 @@ body::after {
   animation: revealScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes revealUp {
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes revealUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes revealFade { to { opacity: 1; } }
+@keyframes revealScale { to { opacity: 1; transform: scale(1); } }
 
-@keyframes revealFade {
-  to { opacity: 1; }
-}
-
-@keyframes revealScale {
-  to { opacity: 1; transform: scale(1); }
-}
+/* Pull-quote underline grow */
+@keyframes underlineGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 /* ─── Hairline Rules ─────────────────────────────────────────────────── */
-.rule {
-  border: none;
-  border-top: 1px solid var(--border);
-}
+.rule        { border: none; border-top: 1px solid var(--border); }
+.rule-strong { border: none; border-top: 1px solid var(--border-strong); }
+.rule-ink    { border: none; border-top: 1px solid var(--ink); }
 
-.rule-strong {
-  border: none;
-  border-top: 1px solid var(--border-strong);
-}
-
-/* ─── Mono Label ─────────────────────────────────────────────────────── */
+/* ─── Mono labels ────────────────────────────────────────────────────── */
 .mono-label {
   font-family: var(--font-mono);
   font-size: 0.5625rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-4);
+  font-weight: 500;
 }
 
-/* ─── Section Label ──────────────────────────────────────────────────── */
 .section-label {
   font-family: var(--font-mono);
   font-size: 0.5625rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--ink-4);
+  color: var(--ink-3);
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.875rem;
+  font-weight: 500;
 }
 
 .section-label::before {
   content: "";
   display: block;
-  width: 1.5rem;
+  width: 2rem;
   height: 1px;
-  background: var(--ink-4);
+  background: var(--accent);
   flex-shrink: 0;
 }
 
-/* ─── Hero ghost monogram ────────────────────────────────────────────── */
+/* ─── Editorial chapter index — large mono numeral on the side ─────── */
+.chapter-num {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-4);
+  font-weight: 500;
+}
+
+.chapter-num strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ─── Serif italic accent — for editorial display lines ────────────── */
+.serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink-2);
+}
+
+/* ─── Hero ghost monogram — serif italic, deep ──────────────────────── */
 .hero-monogram {
   position: absolute;
   right: clamp(-1rem, -2vw, -3rem);
   top: 50%;
   transform: translateY(-54%);
-  font-family: var(--font-sans);
-  font-size: clamp(16rem, 32vw, 38rem);
-  font-weight: 900;
+  font-family: var(--font-serif);
+  font-size: clamp(18rem, 36vw, 44rem);
+  font-weight: 400;
   font-style: italic;
-  letter-spacing: -0.08em;
-  color: var(--ink);
-  opacity: 0.028;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  opacity: 0;
   line-height: 1;
   user-select: none;
   pointer-events: none;
   white-space: nowrap;
   overflow: hidden;
-  animation: revealFade 1.8s ease 200ms forwards;
-  opacity: 0;
+  animation: monoFade 2.2s cubic-bezier(0.16, 1, 0.3, 1) 350ms forwards;
+}
+
+@keyframes monoFade {
+  to { opacity: 0.045; }
+}
+
+/* ─── Drop cap for opening paragraphs ───────────────────────────────── */
+.drop-cap::first-letter {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 3.6em;
+  line-height: 0.85;
+  float: left;
+  margin: 0.12em 0.12em 0 -0.04em;
+  color: var(--accent);
 }
 
 /* ─── Project Row ────────────────────────────────────────────────────── */
 .project-row {
   display: block;
   border-bottom: 1px solid var(--border);
-  transition: background-color 0.18s ease;
+  transition: background-color 0.22s ease;
   text-decoration: none;
   color: inherit;
   position: relative;
 }
 
-.project-row:hover {
-  text-decoration: none;
-}
+.project-row:hover { text-decoration: none; }
 
-/* Number */
+/* Roman numeral / number marker */
 .project-num {
   font-family: var(--font-mono);
   font-size: 0.625rem;
   font-weight: 500;
   color: var(--ink-4);
-  letter-spacing: 0.06em;
-  transition: color 0.18s ease;
+  letter-spacing: 0.14em;
+  transition: color 0.22s ease;
   line-height: 1;
 }
 
-/* On hover, number transitions to accent color — defined inline per-row */
 .project-row:hover .project-num {
-  color: var(--row-accent, var(--ink-3));
+  color: var(--row-accent, var(--accent));
 }
 
-/* Tag pill */
+/* Tag pill — slim with letterspacing */
 .tag {
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono);
   font-size: 0.5rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 2px;
+  padding: 3px 8px;
+  border-radius: 1px;
   border: 1px solid currentColor;
   opacity: 0.55;
-  transition: opacity 0.15s ease, background-color 0.15s ease;
+  transition: opacity 0.18s ease;
   white-space: nowrap;
+  font-weight: 500;
 }
 
-.project-row:hover .tag {
-  opacity: 0.85;
-}
-
-/* Code link */
-.code-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  font-family: var(--font-mono);
-  font-size: 0.5625rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0;
-  transition: opacity 0.18s ease, gap 0.18s ease;
-  white-space: nowrap;
-  text-decoration: none;
-}
-
-.project-row:hover .code-link {
-  opacity: 1;
-  gap: 5px;
-}
+.project-row:hover .tag { opacity: 0.95; }
 
 /* Accent bar — left edge color marker */
 .accent-bar {
   width: 2px;
   flex-shrink: 0;
   border-radius: 1px;
-  transition: width 0.18s ease, opacity 0.18s ease;
+  transition: width 0.22s ease, opacity 0.22s ease;
   align-self: stretch;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .project-row:hover .accent-bar {
-  width: 3px;
+  width: 4px;
   opacity: 1;
 }
 
 /* Row arrow */
 .row-arrow {
   opacity: 0;
-  transition: opacity 0.18s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.22s ease, transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-row:hover .row-arrow {
   opacity: 1;
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
 
 /* ─── Stack chip ─────────────────────────────────────────────────────── */
@@ -271,21 +305,22 @@ body::after {
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.04em;
-  padding: 5px 11px;
-  border-radius: 2px;
+  padding: 6px 12px;
+  border-radius: 1px;
   border: 1px solid var(--border);
   color: var(--ink-3);
-  background: transparent;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  background: var(--surface);
+  transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
   white-space: nowrap;
 }
 
 .stack-chip:hover {
-  border-color: var(--ink-3);
-  color: var(--ink);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
 }
 
 /* ─── Principle card ─────────────────────────────────────────────────── */
@@ -293,55 +328,60 @@ body::after {
   font-family: var(--font-mono);
   font-size: 0.5625rem;
   font-weight: 500;
-  color: var(--ink-4);
-  letter-spacing: 0.1em;
+  color: var(--accent);
+  letter-spacing: 0.18em;
   flex-shrink: 0;
   padding-top: 0.15rem;
-  width: 2.25rem;
+  width: 2.5rem;
 }
 
 /* ─── CTA Buttons ────────────────────────────────────────────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6875rem 1.375rem;
+  gap: 0.625rem;
+  padding: 0.875rem 1.5rem;
   background: var(--ink);
   color: var(--bg);
   font-family: var(--font-mono);
   font-size: 0.5625rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: 1px;
   font-weight: 600;
-  transition: background 0.15s ease, transform 0.15s ease;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 0 0 0 var(--accent);
 }
 
 .btn-primary:hover {
-  background: var(--ink-2);
+  background: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 0 0 var(--accent-2);
 }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6875rem 1.375rem;
+  gap: 0.625rem;
+  padding: 0.875rem 1.5rem;
   border: 1px solid var(--border-strong);
-  color: var(--ink-3);
+  color: var(--ink-2);
   font-family: var(--font-mono);
   font-size: 0.5625rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: 1px;
   font-weight: 500;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  background: transparent;
+  transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 
 .btn-secondary:hover {
   border-color: var(--ink);
   color: var(--ink);
+  transform: translateY(-1px);
 }
 
 /* ─── Row-level CTAs (per project) ───────────────────────────────────── */
@@ -349,16 +389,16 @@ body::after {
 .row-cta-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   font-family: var(--font-mono);
   font-size: 0.5625rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 600;
   text-decoration: none;
-  padding: 0.45rem 0.75rem;
-  border-radius: 2px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  padding: 0.5rem 0.85rem;
+  border-radius: 1px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
   white-space: nowrap;
   border: 1px solid;
 }
@@ -369,7 +409,7 @@ body::after {
 
 .row-cta-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 0 -1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 0 -1px rgba(0, 0, 0, 0.12);
 }
 
 .row-cta-secondary {
@@ -379,4 +419,22 @@ body::after {
 
 .row-cta-secondary:hover {
   transform: translateY(-1px);
+}
+
+/* ─── Marginalia — side note in mono ────────────────────────────────── */
+.marginalia {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-4);
+  line-height: 1.7;
+}
+
+/* ─── Display serif spans inside h1/h2 ──────────────────────────────── */
+.editorial-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--accent);
 }

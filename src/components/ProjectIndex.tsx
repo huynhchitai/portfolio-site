@@ -2,6 +2,8 @@
 
 import { projects } from "@/lib/projects";
 
+const ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
+
 export default function ProjectIndex() {
   return (
     <section
@@ -9,68 +11,78 @@ export default function ProjectIndex() {
       style={{
         padding: `var(--section-pad-y) var(--section-pad-x)`,
         borderTop: "1px solid var(--border)",
+        position: "relative",
       }}
     >
+      {/* Chapter callout */}
+      <div className="chapter-num" style={{ marginBottom: "1.25rem" }}>
+        Chapter <strong>I</strong> &nbsp;·&nbsp; Selected Work
+      </div>
+
       {/* Section header */}
       <div
         style={{
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "space-between",
-          marginBottom: "clamp(2.5rem, 5vw, 4rem)",
-          gap: "1rem",
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 1fr) auto",
+          alignItems: "end",
+          gap: "2rem",
+          marginBottom: "clamp(3rem, 6vw, 5rem)",
+          paddingBottom: "clamp(1.5rem, 3vw, 2.25rem)",
+          borderBottom: "1px solid var(--border-strong)",
         }}
       >
         <div>
-          <div className="section-label" style={{ marginBottom: "1rem" }}>
-            Selected Work
-          </div>
           <h2
             style={{
               fontFamily: "var(--font-sans)",
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontSize: "clamp(2.25rem, 6vw, 4.5rem)",
               fontWeight: 900,
-              letterSpacing: "-0.04em",
+              letterSpacing: "-0.045em",
               lineHeight: 0.95,
               color: "var(--ink)",
             }}
           >
-            Projects
+            A working{" "}
+            <span className="editorial-italic">index</span>
+            <br />
+            of recent work.
           </h2>
         </div>
 
         <div
+          className="hidden sm:flex"
           style={{
-            display: "flex",
             flexDirection: "column",
             alignItems: "flex-end",
-            gap: "0.375rem",
+            gap: "0.5rem",
             flexShrink: 0,
+            paddingBottom: "0.5rem",
           }}
-          className="hidden sm:flex"
         >
           <span
             style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-              fontWeight: 600,
-              letterSpacing: "-0.03em",
-              color: "var(--ink)",
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(2.5rem, 5vw, 4rem)",
+              fontWeight: 400,
+              fontStyle: "italic",
+              letterSpacing: "-0.04em",
+              color: "var(--accent)",
               lineHeight: 1,
             }}
           >
-            11
+            xi
           </span>
           <span
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: "0.5rem",
-              letterSpacing: "0.18em",
+              letterSpacing: "0.2em",
               textTransform: "uppercase",
               color: "var(--ink-4)",
+              fontWeight: 500,
             }}
           >
-            Projects
+            Entries
           </span>
         </div>
       </div>
@@ -78,19 +90,17 @@ export default function ProjectIndex() {
       {/* Column headers */}
       <div
         style={{
-          borderTop: "1px solid var(--border)",
-          borderBottom: "1px solid var(--border)",
-          padding: "0.5rem 0",
+          padding: "0.625rem 0",
           display: "grid",
-          gridTemplateColumns: "3.5rem 1fr auto",
+          gridTemplateColumns: "4rem 1fr auto",
           gap: "1rem",
           alignItems: "center",
-          marginBottom: "0",
+          borderBottom: "1px solid var(--border)",
         }}
       >
-        <span className="mono-label">#</span>
-        <span className="mono-label">Project / Description</span>
-        <span className="mono-label hidden sm:block">Link</span>
+        <span className="mono-label">№</span>
+        <span className="mono-label">Project / Pitch</span>
+        <span className="mono-label hidden sm:block">View</span>
       </div>
 
       {/* Project rows */}
@@ -117,22 +127,22 @@ export default function ProjectIndex() {
                 display: "flex",
                 alignItems: "stretch",
                 gap: 0,
-                padding: "clamp(1.125rem, 2.5vw, 1.75rem) 0",
+                padding: "clamp(1.5rem, 3vw, 2.25rem) 0",
               }}
             >
-              {/* Accent bar — project color marker */}
+              {/* Accent bar */}
               <div
                 className="accent-bar"
                 style={{
                   background: project.accent,
-                  marginRight: "clamp(0.875rem, 2.5vw, 1.75rem)",
+                  marginRight: "clamp(1rem, 2.5vw, 1.75rem)",
                 }}
               />
 
-              {/* Number */}
-              <div style={{ width: "2.75rem", flexShrink: 0, paddingTop: "3px" }}>
-                <span className="project-num">
-                  {String(project.id).padStart(2, "0")}
+              {/* Roman numeral */}
+              <div style={{ width: "3rem", flexShrink: 0, paddingTop: "5px" }}>
+                <span className="project-num" style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.95rem", letterSpacing: "0.04em" }}>
+                  {ROMAN[i] ?? String(project.id).padStart(2, "0")}
                 </span>
               </div>
 
@@ -142,12 +152,12 @@ export default function ProjectIndex() {
                 <h3
                   style={{
                     fontFamily: "var(--font-sans)",
-                    fontSize: "clamp(1rem, 2vw, 1.25rem)",
+                    fontSize: "clamp(1.0625rem, 2vw, 1.35rem)",
                     fontWeight: 700,
                     letterSpacing: "-0.025em",
                     color: "var(--ink)",
                     lineHeight: 1.15,
-                    marginBottom: "0.45rem",
+                    marginBottom: "0.55rem",
                   }}
                 >
                   {project.title}
@@ -157,19 +167,19 @@ export default function ProjectIndex() {
                 <p
                   style={{
                     fontFamily: "var(--font-sans)",
-                    fontSize: "clamp(0.8125rem, 1.5vw, 0.9375rem)",
+                    fontSize: "clamp(0.875rem, 1.5vw, 0.9375rem)",
                     fontWeight: 400,
-                    lineHeight: 1.6,
+                    lineHeight: 1.65,
                     color: "var(--ink-3)",
-                    marginBottom: "0.7rem",
-                    maxWidth: "54ch",
+                    marginBottom: "0.9rem",
+                    maxWidth: "var(--measure-base)",
                   }}
                 >
                   {project.pitch}
                 </p>
 
                 {/* Skill tags */}
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", marginBottom: "0.85rem" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginBottom: "1rem" }}>
                   {project.demonstrates.map((tag) => (
                     <span key={tag} className="tag" style={{ color: project.accent }}>
                       {tag}
@@ -177,7 +187,7 @@ export default function ProjectIndex() {
                   ))}
                 </div>
 
-                {/* Action links — Try demo (primary) + Code (secondary) */}
+                {/* Action links */}
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center" }}>
                   {project.demo && (
                     <a
@@ -192,13 +202,7 @@ export default function ProjectIndex() {
                     >
                       Try demo
                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                        <path
-                          d="M2 8L8 2M8 2H3.5M8 2V6.5"
-                          stroke="currentColor"
-                          strokeWidth="1.6"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
+                        <path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </a>
                   )}
@@ -211,13 +215,7 @@ export default function ProjectIndex() {
                   >
                     Code
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                      <path
-                        d="M2 8L8 2M8 2H3.5M8 2V6.5"
-                        stroke="currentColor"
-                        strokeWidth="1.6"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
+                      <path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </a>
                 </div>
@@ -228,7 +226,10 @@ export default function ProjectIndex() {
       </div>
 
       {/* Footer link */}
-      <div style={{ marginTop: "2.25rem", display: "flex", justifyContent: "flex-end" }}>
+      <div style={{ marginTop: "2.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+        <span className="marginalia" style={{ fontStyle: "italic", fontFamily: "var(--font-serif)", fontSize: "0.95rem", color: "var(--ink-4)" }}>
+          End of selected work — Chapter I.
+        </span>
         <a
           href="https://github.com/huynhchitai"
           target="_blank"
@@ -236,27 +237,22 @@ export default function ProjectIndex() {
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: "0.5625rem",
-            letterSpacing: "0.14em",
+            letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "var(--ink-4)",
+            color: "var(--ink-3)",
             textDecoration: "none",
             display: "inline-flex",
             alignItems: "center",
-            gap: "0.4rem",
-            transition: "color 0.15s ease",
+            gap: "0.5rem",
+            fontWeight: 600,
+            transition: "color 0.18s ease",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--ink)")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-4)")}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-3)")}
         >
           All repositories on GitHub
           <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true">
-            <path
-              d="M1.5 6.5L6.5 1.5M6.5 1.5H3M6.5 1.5V5"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+            <path d="M1.5 6.5L6.5 1.5M6.5 1.5H3M6.5 1.5V5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </a>
       </div>

@@ -4,73 +4,71 @@ export default function Hero() {
   return (
     <section
       className="relative min-h-screen flex flex-col justify-between overflow-hidden"
-      style={{ padding: "clamp(1.75rem, 4vw, 3rem) clamp(1.5rem, 5vw, 5rem)" }}
+      style={{ padding: "clamp(1.75rem, 4vw, 3rem) var(--section-pad-x)" }}
     >
-      {/* ── Ghost monogram — signature detail ────────────────────────── */}
-      <div
-        className="hero-monogram"
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          right: "clamp(-2rem, -4vw, -6rem)",
-          top: "50%",
-          transform: "translateY(-52%)",
-          fontFamily: "var(--font-sans)",
-          fontSize: "clamp(14rem, 30vw, 36rem)",
-          fontWeight: 900,
-          fontStyle: "italic",
-          letterSpacing: "-0.07em",
-          color: "var(--ink)",
-          opacity: 0,
-          lineHeight: 1,
-          userSelect: "none",
-          pointerEvents: "none",
-          whiteSpace: "nowrap",
-          animation: "revealFade 2s ease 600ms forwards",
-        }}
-      >
-        TH
+      {/* ── Ghost monogram — serif italic, deep oxblood ────────────────── */}
+      <div className="hero-monogram" aria-hidden="true">
+        T<span style={{ fontStyle: "italic" }}>H</span>
       </div>
 
-      {/* ── Nav ──────────────────────────────────────────────────────── */}
+      {/* ── Nav — masthead style ─────────────────────────────────────── */}
       <nav
         className="reveal relative z-10 flex items-center justify-between"
         style={{ animationDelay: "0ms" }}
       >
-        {/* Name mark — just name, no domain */}
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.6875rem",
-            letterSpacing: "0.06em",
-            color: "var(--ink)",
-            fontWeight: 600,
-          }}
-        >
-          Tai Huynh
-        </span>
+        <div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem" }}>
+          <span
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.625rem",
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              fontWeight: 600,
+            }}
+          >
+            T.H.
+          </span>
+          <span
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.5625rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--ink-4)",
+              fontWeight: 500,
+            }}
+          >
+            Studio Notebook
+          </span>
+        </div>
 
-        <div className="flex items-center" style={{ gap: "clamp(1.25rem, 3vw, 2.5rem)" }}>
+        <div className="flex items-center" style={{ gap: "clamp(1.5rem, 3vw, 2.75rem)" }}>
           {[
-            { label: "Work",     href: "#work" },
-            { label: "Approach", href: "#approach" },
-            { label: "Contact",  href: "#contact" },
+            { label: "Work",     href: "#work",     num: "01" },
+            { label: "Approach", href: "#approach", num: "02" },
+            { label: "Contact",  href: "#contact",  num: "03" },
           ].map((item) => (
             <a
               key={item.label}
               href={item.href}
               style={{
+                display: "inline-flex",
+                alignItems: "baseline",
+                gap: "0.4rem",
                 fontFamily: "var(--font-mono)",
                 fontSize: "0.5625rem",
-                letterSpacing: "0.16em",
+                letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "var(--ink-4)",
+                color: "var(--ink-3)",
                 textDecoration: "none",
-                transition: "color 0.15s ease",
+                transition: "color 0.18s ease",
+                fontWeight: 500,
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--ink)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-4)")}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-3)")}
             >
+              <span style={{ color: "var(--ink-4)", fontWeight: 400 }}>{item.num}</span>
               {item.label}
             </a>
           ))}
@@ -89,24 +87,24 @@ export default function Hero() {
           justifyContent: "center",
         }}
       >
-        {/* Role label */}
+        {/* Editorial label */}
         <div
           className="reveal section-label"
-          style={{ animationDelay: "80ms", marginBottom: "2.25rem" }}
+          style={{ animationDelay: "80ms", marginBottom: "2.5rem" }}
         >
-          AI &amp; Full-Stack Engineer
+          Vol. I &nbsp;·&nbsp; AI &amp; Full-Stack Engineering
         </div>
 
-        {/* Name — large, tight, commanding */}
+        {/* Name — Grotesk slab with a serif italic Huynh */}
         <h1
           className="reveal"
           style={{
             animationDelay: "160ms",
             fontFamily: "var(--font-sans)",
-            fontSize: "clamp(3.75rem, 10.5vw, 10rem)",
+            fontSize: "clamp(3.75rem, 10.5vw, 10.25rem)",
             fontWeight: 900,
-            lineHeight: 0.9,
-            letterSpacing: "-0.04em",
+            lineHeight: 0.88,
+            letterSpacing: "-0.045em",
             color: "var(--ink)",
             marginBottom: "clamp(1.75rem, 3.5vw, 3rem)",
             position: "relative",
@@ -114,66 +112,119 @@ export default function Hero() {
         >
           Tai
           <br />
-          Huynh
+          <span
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontStyle: "italic",
+              fontWeight: 400,
+              letterSpacing: "-0.03em",
+              color: "var(--accent)",
+              display: "inline-block",
+              paddingRight: "0.05em",
+            }}
+          >
+            Huynh
+          </span>
+          {/* Editorial pull-rule under the name */}
+          <span
+            aria-hidden="true"
+            style={{
+              display: "block",
+              width: "5.5rem",
+              height: "2px",
+              background: "var(--accent)",
+              marginTop: "clamp(1.25rem, 2.5vw, 2rem)",
+              transformOrigin: "left",
+              animation: "underlineGrow 0.9s cubic-bezier(0.16, 1, 0.3, 1) 700ms both",
+            }}
+          />
         </h1>
 
-        {/* Descriptor — clean, confident */}
+        {/* Lede — body with drop-cap-friendly weight */}
         <p
           className="reveal"
           style={{
             animationDelay: "260ms",
             fontFamily: "var(--font-sans)",
-            fontSize: "clamp(1rem, 1.75vw, 1.1875rem)",
+            fontSize: "clamp(1.0625rem, 1.85vw, 1.25rem)",
             fontWeight: 400,
             lineHeight: 1.7,
-            color: "var(--ink-3)",
-            maxWidth: "46ch",
-            marginBottom: "clamp(2.25rem, 5vw, 3.5rem)",
+            color: "var(--ink-2)",
+            maxWidth: "var(--measure-base)",
+            marginBottom: "clamp(0.75rem, 2vw, 1.25rem)",
           }}
         >
-          I build AI-powered features that ship — RAG pipelines, document
-          intelligence, semantic search, MCP servers. Every project
-          security-reviewed, tested, and deployable.
+          I build AI-powered features that{" "}
+          <span className="editorial-italic">ship</span> — RAG pipelines,
+          document intelligence, semantic search, MCP servers.
         </p>
 
-        {/* Stats — mono, precise */}
+        <p
+          className="reveal"
+          style={{
+            animationDelay: "320ms",
+            fontFamily: "var(--font-sans)",
+            fontSize: "clamp(0.9375rem, 1.5vw, 1.0625rem)",
+            fontWeight: 400,
+            lineHeight: 1.75,
+            color: "var(--ink-3)",
+            maxWidth: "var(--measure-base)",
+            marginBottom: "clamp(2.5rem, 5vw, 3.5rem)",
+          }}
+        >
+          Every project security-reviewed, tested, and deployable.
+        </p>
+
+        {/* Stats — editorial dashboard */}
         <div
           className="reveal"
           style={{
-            animationDelay: "340ms",
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "clamp(2rem, 5vw, 4rem)",
+            animationDelay: "380ms",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(8rem, 1fr))",
+            gap: "clamp(1.5rem, 4vw, 3.5rem)",
             marginBottom: "clamp(2.75rem, 5vw, 4.5rem)",
-            paddingBottom: "clamp(2rem, 4vw, 3rem)",
+            paddingTop: "clamp(1.5rem, 3vw, 2.25rem)",
+            paddingBottom: "clamp(1.5rem, 3vw, 2.25rem)",
+            borderTop: "1px solid var(--border)",
             borderBottom: "1px solid var(--border)",
+            maxWidth: "44rem",
           }}
         >
           {[
-            { value: "11",   label: "Projects" },
-            { value: "211",  label: "Passing tests" },
-            { value: "100%", label: "Security-reviewed" },
+            { value: "11",   label: "Projects",          unit: "" },
+            { value: "211",  label: "Passing tests",     unit: "" },
+            { value: "100",  label: "Security-reviewed", unit: "%" },
           ].map((stat) => (
-            <div key={stat.label} style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+            <div key={stat.label} style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
               <span
                 style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)",
-                  fontWeight: 600,
-                  letterSpacing: "-0.03em",
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(2rem, 4vw, 3.25rem)",
+                  fontWeight: 400,
+                  letterSpacing: "-0.02em",
                   color: "var(--ink)",
                   lineHeight: 1,
+                  display: "inline-flex",
+                  alignItems: "baseline",
+                  gap: "0.05em",
                 }}
               >
                 {stat.value}
+                {stat.unit && (
+                  <span style={{ fontSize: "0.55em", color: "var(--accent)", fontStyle: "italic" }}>
+                    {stat.unit}
+                  </span>
+                )}
               </span>
               <span
                 style={{
                   fontFamily: "var(--font-mono)",
                   fontSize: "0.5rem",
-                  letterSpacing: "0.18em",
+                  letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   color: "var(--ink-4)",
+                  fontWeight: 500,
                 }}
               >
                 {stat.label}
@@ -186,7 +237,7 @@ export default function Hero() {
         <div
           className="reveal"
           style={{
-            animationDelay: "420ms",
+            animationDelay: "460ms",
             display: "flex",
             flexWrap: "wrap",
             alignItems: "center",
@@ -194,7 +245,7 @@ export default function Hero() {
           }}
         >
           <a href="#work" className="btn-primary">
-            View work
+            View selected work
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
               <path d="M2 5H8M5.5 2.5L8 5L5.5 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -214,28 +265,40 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── Scroll indicator ─────────────────────────────────────────── */}
+      {/* ── Scroll indicator — editorial colophon ────────────────────── */}
       <div
         className="reveal relative z-10"
         style={{
-          animationDelay: "560ms",
+          animationDelay: "580ms",
           display: "flex",
           alignItems: "center",
-          gap: "1.25rem",
+          gap: "1.5rem",
         }}
       >
-        <hr className="rule" style={{ flex: 1 }} />
         <span
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: "0.5rem",
-            letterSpacing: "0.2em",
+            letterSpacing: "0.22em",
             textTransform: "uppercase",
+            color: "var(--ink-4)",
+            whiteSpace: "nowrap",
+            fontWeight: 500,
+          }}
+        >
+          Continue reading
+        </span>
+        <hr className="rule" style={{ flex: 1 }} />
+        <span
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontStyle: "italic",
+            fontSize: "0.875rem",
             color: "var(--ink-4)",
             whiteSpace: "nowrap",
           }}
         >
-          Scroll
+          chapters i — iii
         </span>
         <svg
           width="12"
@@ -245,20 +308,8 @@ export default function Hero() {
           aria-hidden="true"
           style={{ color: "var(--ink-4)", flexShrink: 0 }}
         >
-          <path
-            d="M6 2V10M6 10L3 7M6 10L9 7"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M6 14V13"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-            opacity="0.4"
-          />
+          <path d="M6 2V10M6 10L3 7M6 10L9 7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M6 14V13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.4" />
         </svg>
       </div>
     </section>

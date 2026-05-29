@@ -32,53 +32,51 @@ export default function Approach() {
       style={{
         padding: `var(--section-pad-y) var(--section-pad-x)`,
         borderTop: "1px solid var(--border)",
+        background: "var(--bg-subtle)",
+        position: "relative",
       }}
     >
-      {/* Two-column layout */}
+      {/* Chapter callout */}
+      <div className="chapter-num" style={{ marginBottom: "1.25rem" }}>
+        Chapter <strong>II</strong> &nbsp;·&nbsp; Method
+      </div>
+
+      {/* Two-column editorial layout */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 22rem), 1fr))",
           gap: "clamp(3rem, 7vw, 7rem)",
+          paddingTop: "clamp(1rem, 2vw, 1.5rem)",
         }}
       >
         {/* Left — narrative */}
         <div>
-          <div className="section-label" style={{ marginBottom: "1rem" }}>
-            Approach
-          </div>
-
           <h2
             style={{
               fontFamily: "var(--font-sans)",
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontSize: "clamp(2.25rem, 5.5vw, 4rem)",
               fontWeight: 900,
-              letterSpacing: "-0.04em",
-              lineHeight: 1,
+              letterSpacing: "-0.045em",
+              lineHeight: 0.95,
               color: "var(--ink)",
-              marginBottom: "1.75rem",
+              marginBottom: "2rem",
             }}
           >
             Built for the{" "}
-            <span
-              style={{
-                color: "var(--ink-3)",
-                fontStyle: "italic",
-              }}
-            >
-              real world.
-            </span>
+            <span className="editorial-italic">real world.</span>
           </h2>
 
           <p
+            className="drop-cap"
             style={{
               fontFamily: "var(--font-sans)",
-              fontSize: "clamp(0.9375rem, 1.75vw, 1.0625rem)",
+              fontSize: "clamp(1rem, 1.85vw, 1.125rem)",
               fontWeight: 400,
               lineHeight: 1.75,
-              color: "var(--ink-3)",
-              marginBottom: "1.25rem",
-              maxWidth: "44ch",
+              color: "var(--ink-2)",
+              marginBottom: "1.5rem",
+              maxWidth: "var(--measure-base)",
             }}
           >
             Production-grade isn&apos;t a marketing phrase. It means features
@@ -93,7 +91,7 @@ export default function Approach() {
               fontWeight: 400,
               lineHeight: 1.75,
               color: "var(--ink-3)",
-              maxWidth: "44ch",
+              maxWidth: "var(--measure-base)",
               marginBottom: "2.75rem",
             }}
           >
@@ -101,47 +99,65 @@ export default function Approach() {
             stack so patterns are reusable and integration is predictable.
           </p>
 
-          {/* Stats callout */}
-          <div
+          {/* Pull quote — editorial callout */}
+          <figure
             style={{
-              display: "inline-block",
-              padding: "1.375rem 1.75rem",
+              padding: "1.75rem 1.875rem",
               background: "var(--surface)",
               border: "1px solid var(--border)",
-              borderLeft: "3px solid var(--ink)",
-              borderRadius: "2px",
+              borderLeft: "3px solid var(--accent)",
+              borderRadius: "1px",
+              maxWidth: "32rem",
+              boxShadow: "0 1px 0 rgba(0,0,0,0.02), 0 12px 24px -18px rgba(122,34,24,0.18)",
             }}
           >
-            <p
+            <blockquote
               style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.8125rem",
-                fontWeight: 500,
-                color: "var(--ink)",
-                lineHeight: 1.7,
-                letterSpacing: "0.01em",
+                fontFamily: "var(--font-serif)",
+                fontStyle: "italic",
+                fontSize: "1.0625rem",
+                color: "var(--ink-2)",
+                lineHeight: 1.55,
+                letterSpacing: "-0.005em",
               }}
             >
-              11 projects · 211 passing tests
-              <br />
-              security-reviewed
-            </p>
-          </div>
+              “Eleven projects · two hundred eleven tests · one stack, one craft.”
+            </blockquote>
+            <figcaption
+              style={{
+                marginTop: "1rem",
+                fontFamily: "var(--font-mono)",
+                fontSize: "0.5625rem",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "var(--ink-4)",
+                fontWeight: 500,
+              }}
+            >
+              — house style
+            </figcaption>
+          </figure>
         </div>
 
-        {/* Right — principles */}
+        {/* Right — principles list */}
         <div>
+          <div
+            className="marginalia"
+            style={{ marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--border)" }}
+          >
+            Four operating principles.
+          </div>
           {principles.map((p, i) => (
             <div
               key={p.number}
               style={{
-                padding: "1.625rem 0",
+                padding: "1.75rem 0",
                 borderBottom:
                   i < principles.length - 1
                     ? "1px solid var(--border)"
                     : undefined,
                 display: "flex",
-                gap: "1.5rem",
+                gap: "1.75rem",
               }}
             >
               <span className="principle-num">{p.number}</span>
@@ -150,8 +166,8 @@ export default function Approach() {
                   style={{
                     fontFamily: "var(--font-sans)",
                     fontWeight: 700,
-                    fontSize: "clamp(0.9375rem, 1.5vw, 1.0625rem)",
-                    letterSpacing: "-0.015em",
+                    fontSize: "clamp(1rem, 1.6vw, 1.125rem)",
+                    letterSpacing: "-0.02em",
                     color: "var(--ink)",
                     marginBottom: "0.5rem",
                     lineHeight: 1.3,
@@ -162,7 +178,7 @@ export default function Approach() {
                 <p
                   style={{
                     fontFamily: "var(--font-sans)",
-                    fontSize: "0.875rem",
+                    fontSize: "0.9375rem",
                     fontWeight: 400,
                     lineHeight: 1.7,
                     color: "var(--ink-3)",
@@ -179,16 +195,35 @@ export default function Approach() {
       {/* Shared stack */}
       <div
         style={{
-          marginTop: "clamp(3.5rem, 7vw, 6rem)",
+          marginTop: "clamp(4rem, 8vw, 7rem)",
           paddingTop: "clamp(2rem, 4vw, 3.5rem)",
           borderTop: "1px solid var(--border)",
         }}
       >
-        <div className="section-label" style={{ marginBottom: "1.5rem" }}>
-          Shared Stack
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "1rem",
+            marginBottom: "1.75rem",
+          }}
+        >
+          <div className="section-label">Shared Stack</div>
+          <span
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontStyle: "italic",
+              fontSize: "1rem",
+              color: "var(--ink-4)",
+            }}
+          >
+            one toolchain, eleven products
+          </span>
         </div>
 
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4375rem" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
           {stack.map((tech) => (
             <span key={tech} className="stack-chip">
               {tech}

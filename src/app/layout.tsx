@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Schibsted_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Schibsted_Grotesk, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 const schibsted = Schibsted_Grotesk({
@@ -14,6 +14,14 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
   display: "swap",
   weight: ["300", "400", "500", "600"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-serif",
+  display: "swap",
+  weight: ["400"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -36,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${schibsted.variable} ${jetbrainsMono.variable}`}
+      className={`${schibsted.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
     >
       <body>{children}</body>
     </html>
