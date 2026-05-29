@@ -19,7 +19,7 @@ export const projects: Project[] = [
     demonstrates: ["RAG", "pgvector", "streaming", "citations"],
     accent: "#FF6B00",
     accentLight: "#FF6B0015",
-    github: "https://github.com/0CCHacker/rag-chatbot",
+    github: "https://github.com/huynhchitai/rag-chatbot",
     demo: "https://rag-chatbot-dgxvcbmcia-uc.a.run.app",
   },
   {
@@ -30,7 +30,7 @@ export const projects: Project[] = [
     demonstrates: ["Structured extraction", "SSRF defense"],
     accent: "#D98F00",
     accentLight: "#D98F0015",
-    github: "https://github.com/0CCHacker/web-scraper",
+    github: "https://github.com/huynhchitai/web-scraper",
     demo: "https://web-scraper-dgxvcbmcia-uc.a.run.app",
   },
   {
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     demonstrates: ["Prompt engineering", "structured output"],
     accent: "#E2483D",
     accentLight: "#E2483D15",
-    github: "https://github.com/0CCHacker/resume-tailor",
+    github: "https://github.com/huynhchitai/resume-tailor",
     demo: "https://resume-tailor-dgxvcbmcia-uc.a.run.app",
   },
   {
@@ -52,7 +52,7 @@ export const projects: Project[] = [
     demonstrates: ["Multimodal vision", "document AI"],
     accent: "#1F6F4A",
     accentLight: "#1F6F4A15",
-    github: "https://github.com/0CCHacker/invoice-extractor",
+    github: "https://github.com/huynhchitai/invoice-extractor",
     demo: "https://invoice-extractor-dgxvcbmcia-uc.a.run.app",
   },
   {
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     demonstrates: ["Embeddable widget", "grounded RAG", "CORS"],
     accent: "#E8613A",
     accentLight: "#E8613A15",
-    github: "https://github.com/0CCHacker/faq-widget",
+    github: "https://github.com/huynhchitai/faq-widget",
     demo: "https://faq-widget-dgxvcbmcia-uc.a.run.app",
   },
   {
@@ -74,7 +74,7 @@ export const projects: Project[] = [
     demonstrates: ["Long-context", "structured extraction"],
     accent: "#2F4B7C",
     accentLight: "#2F4B7C15",
-    github: "https://github.com/0CCHacker/meeting-notes",
+    github: "https://github.com/huynhchitai/meeting-notes",
     demo: "https://meeting-notes-dgxvcbmcia-uc.a.run.app",
   },
   {
@@ -85,7 +85,7 @@ export const projects: Project[] = [
     demonstrates: ["Embeddings", "vector search"],
     accent: "#8C2D2D",
     accentLight: "#8C2D2D15",
-    github: "https://github.com/0CCHacker/semantic-search",
+    github: "https://github.com/huynhchitai/semantic-search",
     demo: "https://semantic-search-dgxvcbmcia-uc.a.run.app",
   },
   {
@@ -96,7 +96,7 @@ export const projects: Project[] = [
     demonstrates: ["Streaming generation", "prompt templates"],
     accent: "#7A8C0A",
     accentLight: "#7A8C0A15",
-    github: "https://github.com/0CCHacker/content-studio",
+    github: "https://github.com/huynhchitai/content-studio",
     demo: "https://content-studio-dgxvcbmcia-uc.a.run.app",
   },
   {
@@ -107,7 +107,7 @@ export const projects: Project[] = [
     demonstrates: ["Batch classification", "aggregation", "data-viz"],
     accent: "#2B5FE3",
     accentLight: "#2B5FE315",
-    github: "https://github.com/0CCHacker/review-analytics",
+    github: "https://github.com/huynhchitai/review-analytics",
     demo: "https://review-analytics-dgxvcbmcia-uc.a.run.app",
   },
   {
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     demonstrates: ["Code generation", "SQL safety analysis"],
     accent: "#C98A00",
     accentLight: "#C98A0015",
-    github: "https://github.com/0CCHacker/nl-to-sql",
+    github: "https://github.com/huynhchitai/nl-to-sql",
     demo: "https://nl-to-sql-dgxvcbmcia-uc.a.run.app",
   },
   {
@@ -129,7 +129,7 @@ export const projects: Project[] = [
     demonstrates: ["MCP protocol", "tool design", "SSRF defense"],
     accent: "#1F8C8C",
     accentLight: "#1F8C8C15",
-    github: "https://github.com/0CCHacker/web-research-mcp",
+    github: "https://github.com/huynhchitai/web-research-mcp",
     // No web demo — MCP runs over stdio inside an AI client.
   },
 ];

@@ -201,7 +201,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="https://github.com/0CCHacker"
+            href="https://github.com/huynhchitai"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary"

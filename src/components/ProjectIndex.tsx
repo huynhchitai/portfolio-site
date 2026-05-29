@@ -230,7 +230,7 @@ export default function ProjectIndex() {
       {/* Footer link */}
       <div style={{ marginTop: "2.25rem", display: "flex", justifyContent: "flex-end" }}>
         <a
-          href="https://github.com/0CCHacker"
+          href="https://github.com/huynhchitai"
           target="_blank"
           rel="noopener noreferrer"
           style={{

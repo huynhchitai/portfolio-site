@@ -107,7 +107,7 @@ export default function Contact() {
 
         {/* GitHub */}
         <a
-          href="https://github.com/0CCHacker"
+          href="https://github.com/huynhchitai"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -139,7 +139,7 @@ export default function Contact() {
               (e.currentTarget.style.color = "var(--ink)")
             }
           >
-            0CCHacker
+            huynhchitai
           </span>
           <span
             style={{
